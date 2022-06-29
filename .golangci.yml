@@ -1,0 +1,142 @@
+## https://golangci-lint.run/
+linters:
+  # enable-all: true
+  disable-all: true
+  fast: true
+  ## https://golangci-lint.run/usage/linters/
+  enable:
+    - deadcode
+    - errcheck
+    # - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - structcheck
+    - typecheck
+    - unused
+    - varcheck
+
+    - bodyclose
+    - depguard
+    - durationcheck
+    # - exhaustive
+    - forcetypeassert
+    # - goconst
+    # - gosec
+    # - misspell
+    # - makezero
+    - nakedret
+    # - nestif
+    - nilerr
+    - nilnil
+    - rowserrcheck
+    - stylecheck
+    # - tagliatelle
+    - tenv
+    - unconvert
+    - unparam
+    # - wastedassign
+
+    # - containedctx
+
+  # presets:
+  #   - bugs
+  #   - error
+  # disable:
+  # - typecheck
+
+linters-settings:
+  nilnil:
+    checked-types:
+      - ptr
+      - func
+      - iface
+      - map
+      - chan
+  stylecheck:
+    go: "1.17"
+    checks: ["-ST1000", "-ST1016", "-ST1020", "-ST1021", "-ST1022"]
+    initialisms:
+      [
+        "ACL",
+        "API",
+        "ASCII",
+        "CPU",
+        "CSS",
+        "DNS",
+        "EOF",
+        "GUID",
+        "HTML",
+        "HTTP",
+        "HTTPS",
+        "ID",
+        "IP",
+        "JSON",
+        "QPS",
+        "RAM",
+        "RPC",
+        "SLA",
+        "SMTP",
+        "SQL",
+        "SSH",
+        "TCP",
+        "TLS",
+        "TTL",
+        "UDP",
+        "UI",
+        "GID",
+        "UID",
+        "UUID",
+        "URI",
+        "URL",
+        "UTF8",
+        "VM",
+        "XML",
+        "XMPP",
+        "XSRF",
+        "XSS",
+        "SIP",
+        "RTP",
+        "AMQP",
+        "DB",
+        "TS",
+      ]
+  errcheck:
+    check-type-assertions: false
+    check-blank: false
+    ignore: fmt:.*,io/ioutil:(^Read|Write).*,io:(^Read|Write).*
+    disable-default-exclusions: false
+  goconst:
+    match-constant: true
+    min-len: 4
+    min-occurrences: 4
+    ignore-tests: true
+    numbers: true
+  unparam:
+    check-exported: true
+  varcheck:
+    exported-fields: true
+  staticcheck:
+    go: "1.17"
+    checks: ["all"]
+  tagliatelle:
+    case:
+      use-field-name: false
+      rules:
+        json: camel
+        yaml: camel
+        xml: camel
+        mapstructure: kebab
+
+run:
+  timeout: 2m
+  issue-exit-code: 10
+  tests: true
+  skip-dirs-use-default: true
+  skip-dirs:
+    - test
+    - bin
+  # skip-files:
+  #   - ""
+  allow-parallel-runners: true
+  go: "1.17"
