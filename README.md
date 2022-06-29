@@ -1,0 +1,2 @@
+# golangci-lint
+.golangci.yml
